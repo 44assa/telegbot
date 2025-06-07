@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Админ панель FAQ</title>
+</head>
+<body>
+    <h1>Админ панель FAQ</h1>
+
+    <h2>Добавить новый вопрос</h2>
+    <form action="/add" method="post">
+        <input type="text" name="category" placeholder="Категория" required>
+        <input type="text" name="question" placeholder="Вопрос" required>
+        <input type="text" name="answer" placeholder="Ответ" required>
+        <button type="submit">Добавить</button>
+    </form>
+
+    <h2>Существующие вопросы</h2>
+    <ul>
+        {% for faq in faqs %}
+            <li>{{ faq.question }} - {{ faq.answer }}
+                <form action="/delete/{{ faq.id }}" method="post">
+                    <button type="submit">Удалить</button>
+                </form>
+                <form action="/update/{{ faq.id }}" method="post">
+                    <input type="text" name="category" placeholder="Новая категория" required>
+                    <input type="text" name="question" placeholder="Новый вопрос" required>
+                    <input type="text" name="answer" placeholder="Новый ответ" required>
+                    <button type="submit">Обновить</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
